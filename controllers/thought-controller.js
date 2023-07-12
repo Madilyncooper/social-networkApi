@@ -30,7 +30,7 @@ const thoughtRoutes = {
                 },
                 {
                     $push:
-                        { thoughts: thoughtDb.thoughts }
+                        { thoughts: thoughtDb }
                 },
                 {
                     new: true
@@ -48,10 +48,11 @@ const thoughtRoutes = {
                 _id: req.params.thoughtId
             },
                 {
-                    $set: req.body
+                    $set: req.body,
                 },
                 {
-                    runValidators: true, new: true
+                    runValidators: true, 
+                    new: true
                 });
             res.json(thoughtDb);
         } catch (Error) {
