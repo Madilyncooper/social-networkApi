@@ -118,7 +118,7 @@ const thoughtRoutes = {
                     runValidators: true, new: true
                 }
             );
-            return (thoughtDb ? res.json(thoughtDb) : res.status(404).json({ message: 'No thought with this id!' }));
+            res.json({ message: 'Thought deleted' });
         } catch (Error) {
             console.log(Error);
             res.status(500);
