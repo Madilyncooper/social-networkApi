@@ -32,7 +32,8 @@ const userRoutes = {
     async updateUser(req, res) {
         try {
             const userDb = await User.findOneAndUpdate(
-                { _id: req.params.userId },
+                { _id: req.params.userId 
+                },
                 {
                     $set: req.body,
                 },

@@ -51,7 +51,7 @@ const thoughtRoutes = {
                     $set: req.body,
                 },
                 {
-                    runValidators: true, 
+                    runValidators: true,
                     new: true
                 });
             res.json(thoughtDb);
@@ -90,20 +90,15 @@ const thoughtRoutes = {
     async addReaction(req, res) {
         try {
             const thoughtDb = await Thought.findOneAndUpdate(
-                {
-                    _id: req.params.thoughtId
-                },
-                {
-                    $addToSet: { reactions: req.body }
-                },
-                {
-                    runValidators: true, new: true
-                }
+                { _id: req.params.thoughtId },
+                { $addToSet: { reactions: req.body } },
+                { runValidators: true, new: true }
             );
+            console.log(thoughtDb);
             res.json(thoughtDb);
         } catch (Error) {
             console.log(Error);
-            res.status(500).json(Error);
+            res.status(500);
         }
     },
     async removeReaction(req, res) {
@@ -123,7 +118,7 @@ const thoughtRoutes = {
                     runValidators: true, new: true
                 }
             );
-            res.json(thoughtDb);
+            return (thoughtDb ? res.json(thoughtDb) : res.status(404).json({ message: 'No thought with this id!' }));
         } catch (Error) {
             console.log(Error);
             res.status(500);
